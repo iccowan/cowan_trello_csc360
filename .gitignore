@@ -1,3 +1,4 @@
+# Eclipse and Maven Ignores
 .metadata
 .classpath
 .project
@@ -5,3 +6,6 @@
 .DS_Store
 log/
 target/
+
+# Custom Ignores
+.dbinfo
