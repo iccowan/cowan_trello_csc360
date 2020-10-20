@@ -11,7 +11,7 @@ public class User
 
 	private String name;
 	private String password;
-	private ArrayList<Board> boards;
+	private HasMembersList<Board> boards;
 
 	/**
 	 * @param name     - The name of the user that we are creating
@@ -21,6 +21,8 @@ public class User
 	{
 		this.name = name;
 		this.password = password;
+		
+		this.boards = new HasMembersList<Board>();
 	}
 
 	/**
@@ -37,7 +39,7 @@ public class User
 	public void addBoard(Board board)
 	{
 		// Add the board to the user's list of boards
-		boards.add(board);
+		boards.addMember(board);
 	}
 
 	/**
@@ -47,16 +49,7 @@ public class User
 	 */
 	public boolean removeBoard(Board board)
 	{
-		// Check and make sure the board exists in the user's list of boards
-		if (! boards.contains(board))
-			return false;
-
-		// Now, we know the board exists in the users boards so we can remove it
-		int boardIndex = boards.indexOf(board);
-		boards.remove(boardIndex);
-
-		// Success
-		return true;
+		return boards.removeMember(board);
 	}
 
 	/**
@@ -88,7 +81,7 @@ public class User
 	 */
 	public ArrayList<Board> getBoards()
 	{
-		return boards;
+		return boards.getMembers();
 	}
 
 }

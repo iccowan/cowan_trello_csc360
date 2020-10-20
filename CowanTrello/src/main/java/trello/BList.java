@@ -10,7 +10,7 @@ public class BList
 {
 
 	private String name;
-	private ArrayList<Card> cards;
+	private HasMembersList<Card> cards;
 	private Board board;
 
 	/**
@@ -20,6 +20,7 @@ public class BList
 	public BList(String name, Board board)
 	{
 		this.name = name;
+		this.cards = new HasMembersList<Card>();
 		this.board = board;
 	}
 
@@ -28,7 +29,16 @@ public class BList
 	 */
 	public void addCard(Card card)
 	{
-		cards.add(card);
+		cards.addMember(card);
+	}
+	
+	/**
+	 * @param card  - Card to add to the board
+	 * @param index - Index for the new card to be added
+	 */
+	public void addCard(int index, Card card)
+	{
+		cards.addMember(index, card);
 	}
 
 	/**
@@ -38,40 +48,22 @@ public class BList
 	 */
 	public boolean removeCard(Card card)
 	{
-		// Check and make sure the card exists
-		if (! cards.contains(card))
-			return false;
-
-		// Now, we know the card exists within the list, so we can remove the card
-		int cardIndex = cards.indexOf(card);
-		cards.remove(cardIndex);
-
-		// Success
-		return true;
+		return cards.removeMember(card);
 	}
 
 	/**
 	 * @param card     - Card to move in the list
-	 * @param newIndex - New index in the list for the card
+	 * @param index    - New index in the list for the card
 	 * @return boolean - If the card is moved successfully, returns true
 	 * 					 If the card is not moved successfully, returns false
 	 */
-	public boolean moveCard(Card card, int newIndex)
+	public boolean moveCard(Card card, int index)
 	{
-		// Check and make sure the card exists
-		if (! cards.contains(card))
+		if(! cards.removeMember(card))
 			return false;
-
-		// Make sure the new index is valid
-		if (newIndex < 0 || newIndex >= cards.size())
-			return false;
-
-		// Now, we know the card exists and the index is valid,
-		// so let's move the card to the new index
-		int oldIndex = cards.indexOf(card);
-		cards.remove(oldIndex);
-		cards.add(newIndex, card);
-
+		
+		cards.addMember(index, card);
+		
 		// Success
 		return true;
 	}
@@ -97,7 +89,7 @@ public class BList
 	 */
 	public ArrayList<Card> getCards()
 	{
-		return cards;
+		return cards.getMembers();
 	}
 
 	/**
