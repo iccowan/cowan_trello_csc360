@@ -28,12 +28,15 @@ public class User
 	/**
 	 * @param name     - The name of the user to login
 	 * @param password - The password of the user to login
-	 * @return User - The User object of the user that has been logged in
+	 * @return User - Returns true if the name and password match
+	 * 				  Returns false if the name and password don't match
 	 */
-	public static User login(String name, String password)
+	public boolean login(String name, String password)
 	{
-		//
-		return new User("", "");
+		if (this.name == name && this.password == password)
+			return true;
+		else
+			return false;
 	}
 
 	public void addBoard(Board board)
