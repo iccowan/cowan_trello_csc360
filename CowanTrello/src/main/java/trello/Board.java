@@ -12,6 +12,12 @@ public class Board
 	private String name;
 	private User owner;
 	private HasMembersList<BList> lists;
+	
+	/**
+	 * Default constructor
+	 */
+	
+	public Board() {}
 
 	/**
 	 * @param name  - Name of the board to be created
@@ -40,6 +46,11 @@ public class Board
 	public boolean removeList(BList list)
 	{
 		return lists.removeMember(list);
+	}
+	
+	public boolean hasList(BList list)
+	{
+		return lists.hasMember(list);
 	}
 
 	/**
@@ -72,6 +83,67 @@ public class Board
 	public ArrayList<BList> getLists()
 	{
 		return lists.getMembers();
+	}
+
+	/**
+	 * @param owner the owner to set
+	 */
+	public void setOwner(User owner)
+	{
+		this.owner = owner;
+	}
+
+	/**
+	 * @param lists the lists to set
+	 */
+	public void setLists(HasMembersList<BList> lists)
+	{
+		this.lists = lists;
+	}
+	
+	/**
+	 * @param that - Board to compare
+	 * @return boolean
+	 */
+	public boolean equals(Board that)
+	{
+		// Make sure the names are the same
+		if (this.name != that.name)
+			return false;
+		
+		// Make sure the owner is the same
+		if (! this.owner.equals(that.owner))
+			return false;
+		
+		// Make sure all of this lists are contained within that
+		for (BList l : this.lists)
+			if (! that.hasList(l))
+				return false;
+		
+		// Make sure all of that lists are contained within this
+		for (BList l : that.lists)
+			if(! this.hasList(l))
+				return false;
+		
+		// Everything is the same
+		return true;
+	}
+	
+	/**
+	 * @return String - The string of the file where the serialized object lives
+	 */
+	public String serializeToXML()
+	{
+		return XMLSerializer.<Board>serializeToXML(this);
+	}
+	
+	/**
+	 * @param objectFileName - File name where the object lives that we're going to deserialize
+	 * @return Board - The list object that we want to return
+	 */
+	public static Board deserializeFromXML(String objectFileName)
+	{
+		return XMLSerializer.<Board>deserializeFromXML(objectFileName);
 	}
 
 }

@@ -12,7 +12,12 @@ public class BList
 	private String name;
 	private HasMembersList<Card> cards;
 	private Board board;
-
+	
+	/*
+	 * Default Constructor
+	 */
+	public BList() {}
+	
 	/**
 	 * @param name
 	 * @param board
@@ -67,6 +72,15 @@ public class BList
 		// Success
 		return true;
 	}
+	
+	/**
+	 * @param c - Card that we want to check and see if it exists here
+	 * @return boolean - Returns whether or not the card exists here
+	 */
+	public boolean hasCard(Card c)
+	{
+		return cards.hasMember(c);
+	}
 
 	/**
 	 * @return the name
@@ -98,6 +112,63 @@ public class BList
 	public Board getBoard()
 	{
 		return board;
+	}
+	
+	/**
+	 * @param cards the cards to set
+	 */
+	public void setCards(HasMembersList<Card> cards)
+	{
+		this.cards = cards;
+	}
+
+	/**
+	 * @param board the board to set
+	 */
+	public void setBoard(Board board)
+	{
+		this.board = board;
+	}
+	
+	/**
+	 * @param that - List to compare
+	 * @return boolean
+	 */
+	public boolean equals(BList that)
+	{
+		// If the names aren't the same, not equal
+		if (this.name != that.name)
+			return false;
+		
+		// Make sure all of this cards belong to that board
+		for(Card c : this.cards)
+			if (! that.hasCard(c))
+				return false;
+		
+		// Make sure all of that cards belong to that board
+		for(Card c : that.cards)
+			if(! this.hasCard(c))
+				return false;
+			
+		// Equal
+		return true;
+	}
+	
+	/**
+	 * @return String - The string of the file where the serialized object lives
+	 */
+	public String serializeToXML()
+	{
+		return XMLSerializer.<BList>serializeToXML(this);
+	}
+	
+	/**
+	 * @param objectFileName - File name where the object lives that we're going to deserialize
+	 * @return BList - The list object that we want to return
+	 */
+	public static BList deserializeFromXML(String objectFileName)
+	{
+		return XMLSerializer.<BList>deserializeFromXML(objectFileName);
 	}
 
 }

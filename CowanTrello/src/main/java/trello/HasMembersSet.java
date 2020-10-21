@@ -1,5 +1,6 @@
 package trello;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -8,10 +9,15 @@ import java.util.Set;
  *
  * @param <T> - Type for the Set
  */
-public class HasMembersSet<T> implements HasMembers<T>
+public class HasMembersSet<T> extends HasMembers<T>
 {
 
-	private Set<T> members;
+	private Set<T> members = new HashSet<T>();
+	
+	/**
+	 * Default constructor
+	 */
+	public HasMembersSet() {}
 
 	/**
 	 * @param member - User to be added as a member
@@ -21,7 +27,6 @@ public class HasMembersSet<T> implements HasMembers<T>
 		members.add(member);
 	}
 
-	
 	/**
 	 * @param member   - Member to remove from the members set
 	 * @return boolean - If the member is removed successfully, returns true
@@ -46,6 +51,14 @@ public class HasMembersSet<T> implements HasMembers<T>
 	public Set<T> getMembers()
 	{
 		return members;
+	}
+
+	/**
+	 * @param members the members to set
+	 */
+	public void setMembers(Set<T> members)
+	{
+		this.members = members;
 	}
 	
 }

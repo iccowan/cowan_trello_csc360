@@ -12,6 +12,11 @@ public class User
 	private String name;
 	private String password;
 	private HasMembersList<Board> boards;
+	
+	/**
+	 * Default constructor
+	 */
+	public User() {}
 
 	/**
 	 * @param name     - The name of the user that we are creating
@@ -85,6 +90,39 @@ public class User
 	public ArrayList<Board> getBoards()
 	{
 		return boards.getMembers();
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword()
+	{
+		return password;
+	}
+
+	/**
+	 * @param boards the boards to set
+	 */
+	public void setBoards(HasMembersList<Board> boards)
+	{
+		this.boards = boards;
+	}
+	
+	/**
+	 * @return String - The string of the file where the serialized object lives
+	 */
+	public String serializeToXML()
+	{
+		return XMLSerializer.<User>serializeToXML(this);
+	}
+	
+	/**
+	 * @param objectFileName - File name where the object lives that we're going to deserialize
+	 * @return User - The list object that we want to return
+	 */
+	public static User deserializeFromXML(String objectFileName)
+	{
+		return XMLSerializer.<User>deserializeFromXML(objectFileName);
 	}
 
 }

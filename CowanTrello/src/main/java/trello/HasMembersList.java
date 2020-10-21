@@ -8,10 +8,15 @@ import java.util.ArrayList;
  *
  * @param <T> - Type for the ArrayList
  */
-public class HasMembersList<T> implements HasMembers<T>
+public class HasMembersList<T> extends HasMembers<T>
 {
 	
 	private ArrayList<T> members = new ArrayList<T>();
+	
+	/**
+	 * Default constructor
+	 */
+	public HasMembersList() {}
 
 	/**
 	 * @param member - Member to be added as a member
@@ -60,6 +65,14 @@ public class HasMembersList<T> implements HasMembers<T>
 	public ArrayList<T> getMembers()
 	{
 		return members;
+	}
+
+	/**
+	 * @param members the members to set
+	 */
+	public void setMembers(ArrayList<T> members)
+	{
+		this.members = members;
 	}
 	
 }
