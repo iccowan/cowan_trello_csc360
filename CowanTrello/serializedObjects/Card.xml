@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_261" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="trello.Card" id="Card0">
+    <void id="HasMembersList0" property="components">
+     <void property="members">
+      <void method="add">
+       <object class="trello.Component">
+        <void property="desc">
+         <string>com1</string>
+        </void>
+        <void property="maxNum">
+         <int>1</int>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="trello.Component">
+        <void property="desc">
+         <string>com2</string>
+        </void>
+        <void property="maxNum">
+         <int>3</int>
+        </void>
+       </object>
+      </void>
+     </void>
+    </void>
+    <void id="HasMembersSet0" property="labels">
+     <void property="members">
+      <void method="add">
+       <object class="trello.Label">
+        <void property="text">
+         <string>lab2</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="trello.Label">
+        <void property="text">
+         <string>lab1</string>
+        </void>
+       </object>
+      </void>
+     </void>
+    </void>
+    <void property="list">
+     <object class="trello.BList" id="BList0">
+      <void property="board">
+       <object class="trello.Board" id="Board0">
+        <void id="HasMembersSet1" property="members">
+         <void property="members">
+          <void method="add">
+           <object class="trello.User" id="User0">
+            <void id="HasMembersList1" property="boards">
+             <void property="members">
+              <void method="add">
+               <object idref="Board0"/>
+              </void>
+             </void>
+            </void>
+            <void property="name">
+             <string>u1</string>
+            </void>
+            <void property="password">
+             <string>p</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </void>
+        <void property="name">
+         <string>b1</string>
+        </void>
+        <void property="owner">
+         <object idref="User0"/>
+        </void>
+       </object>
+      </void>
+      <void id="HasMembersList2" property="cards">
+       <void property="members">
+        <void method="add">
+         <object idref="Card0"/>
+        </void>
+       </void>
+      </void>
+      <void property="name">
+       <string>l1</string>
+      </void>
+     </object>
+    </void>
+    <void property="name">
+     <string>c1</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="trello.Card" id="Card1">
+    <void id="HasMembersList3" property="components">
+     <void property="members">
+      <void method="add">
+       <object class="trello.Component">
+        <void property="desc">
+         <string>com3</string>
+        </void>
+        <void property="maxNum">
+         <int>2</int>
+        </void>
+       </object>
+      </void>
+     </void>
+    </void>
+    <void id="HasMembersSet2" property="labels">
+     <void property="members">
+      <void method="add">
+       <object class="trello.Label">
+        <void property="text">
+         <string>lab3</string>
+        </void>
+       </object>
+      </void>
+     </void>
+    </void>
+    <void property="list">
+     <object class="trello.BList" id="BList1">
+      <void property="board">
+       <object class="trello.Board" id="Board1">
+        <void id="HasMembersSet3" property="members">
+         <void property="members">
+          <void method="add">
+           <object class="trello.User" id="User1">
+            <void id="HasMembersList4" property="boards">
+             <void property="members">
+              <void method="add">
+               <object idref="Board1"/>
+              </void>
+             </void>
+            </void>
+            <void property="name">
+             <string>u2</string>
+            </void>
+            <void property="password">
+             <string>p</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </void>
+        <void property="name">
+         <string>b2</string>
+        </void>
+        <void property="owner">
+         <object idref="User1"/>
+        </void>
+       </object>
+      </void>
+      <void id="HasMembersList5" property="cards">
+       <void property="members">
+        <void method="add">
+         <object idref="Card1"/>
+        </void>
+       </void>
+      </void>
+      <void property="name">
+       <string>l2</string>
+      </void>
+     </object>
+    </void>
+    <void property="name">
+     <string>c2</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="trello.Card" id="Card2">
+    <void property="list">
+     <object class="trello.BList" id="BList2">
+      <void property="board">
+       <object class="trello.Board" id="Board2">
+        <void id="HasMembersSet4" property="members">
+         <void property="members">
+          <void method="add">
+           <object class="trello.User" id="User2">
+            <void id="HasMembersList6" property="boards">
+             <void property="members">
+              <void method="add">
+               <object idref="Board2"/>
+              </void>
+             </void>
+            </void>
+            <void property="name">
+             <string>u3</string>
+            </void>
+            <void property="password">
+             <string>p</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </void>
+        <void property="name">
+         <string>b3</string>
+        </void>
+        <void property="owner">
+         <object idref="User2"/>
+        </void>
+       </object>
+      </void>
+      <void id="HasMembersList7" property="cards">
+       <void property="members">
+        <void method="add">
+         <object idref="Card2"/>
+        </void>
+       </void>
+      </void>
+      <void property="name">
+       <string>l3</string>
+      </void>
+     </object>
+    </void>
+    <void property="name">
+     <string>c3</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="trello.Card" id="Card3">
+    <void property="list">
+     <object class="trello.BList" id="BList3">
+      <void property="board">
+       <object class="trello.Board" id="Board3">
+        <void id="HasMembersSet5" property="members">
+         <void property="members">
+          <void method="add">
+           <object class="trello.User" id="User3">
+            <void id="HasMembersList8" property="boards">
+             <void property="members">
+              <void method="add">
+               <object idref="Board3"/>
+              </void>
+             </void>
+            </void>
+            <void property="name">
+             <string>u4</string>
+            </void>
+            <void property="password">
+             <string>p</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </void>
+        <void property="name">
+         <string>b4</string>
+        </void>
+        <void property="owner">
+         <object idref="User3"/>
+        </void>
+       </object>
+      </void>
+      <void id="HasMembersList9" property="cards">
+       <void property="members">
+        <void method="add">
+         <object idref="Card3"/>
+        </void>
+       </void>
+      </void>
+      <void property="name">
+       <string>l4</string>
+      </void>
+     </object>
+    </void>
+    <void property="name">
+     <string>c4</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

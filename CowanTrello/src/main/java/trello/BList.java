@@ -10,7 +10,7 @@ public class BList
 {
 
 	private String name;
-	private HasMembersList<Card> cards;
+	private HasMembersList<Card> cards = new HasMembersList<Card>();
 	private Board board;
 	
 	/*
@@ -25,25 +25,26 @@ public class BList
 	public BList(String name, Board board)
 	{
 		this.name = name;
-		this.cards = new HasMembersList<Card>();
 		this.board = board;
 	}
 
 	/**
 	 * @param card - Card to add to the board
 	 */
-	public void addCard(Card card)
+	public void addCard(Card card, User requester)
 	{
-		cards.addMember(card);
+		if (board.hasMember(requester))
+			cards.addMember(card);
 	}
 	
 	/**
 	 * @param card  - Card to add to the board
 	 * @param index - Index for the new card to be added
 	 */
-	public void addCard(int index, Card card)
+	public void addCard(Card card, int index, User requester)
 	{
-		cards.addMember(index, card);
+		if (board.hasMember(requester))
+			cards.addMember(index, card);
 	}
 
 	/**
@@ -51,9 +52,11 @@ public class BList
 	 * @return boolean - If the card is removed successfully, returns true
 	 * 					 If the card is not removed successfully, returns false
 	 */
-	public boolean removeCard(Card card)
+	public boolean removeCard(Card card, User requester)
 	{
-		return cards.removeMember(card);
+		if (board.hasMember(requester))
+			return cards.removeMember(card);
+		return false;
 	}
 
 	/**
@@ -62,15 +65,19 @@ public class BList
 	 * @return boolean - If the card is moved successfully, returns true
 	 * 					 If the card is not moved successfully, returns false
 	 */
-	public boolean moveCard(Card card, int index)
+	public boolean moveCard(Card card, int index, User requester)
 	{
-		if(! cards.removeMember(card))
-			return false;
-		
-		cards.addMember(index, card);
-		
-		// Success
-		return true;
+		if (board.hasMember(requester))
+		{
+			if(! cards.removeMember(card))
+				return false;
+			
+			cards.addMember(index, card);
+			
+			// Success
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -101,9 +108,9 @@ public class BList
 	/**
 	 * @return the cards
 	 */
-	public ArrayList<Card> getCards()
+	public HasMembersList<Card> getCards()
 	{
-		return cards.getMembers();
+		return cards;
 	}
 
 	/**
@@ -134,10 +141,13 @@ public class BList
 	 * @param that - List to compare
 	 * @return boolean
 	 */
-	public boolean equals(BList that)
+	@Override
+	public boolean equals(Object thatObj)
 	{
+		BList that = (BList) thatObj;
+		
 		// If the names aren't the same, not equal
-		if (this.name != that.name)
+		if (! this.name.equals(that.name))
 			return false;
 		
 		// Make sure all of this cards belong to that board
@@ -155,20 +165,19 @@ public class BList
 	}
 	
 	/**
-	 * @return String - The string of the file where the serialized object lives
+	 * @param all - Array list of all objects to serialize
 	 */
-	public String serializeToXML()
+	public static void serializeToXML(ArrayList<BList> all)
 	{
-		return XMLSerializer.<BList>serializeToXML(this);
+		XMLSerializer.<BList>serializeToXML(all, "BList");
 	}
 	
 	/**
-	 * @param objectFileName - File name where the object lives that we're going to deserialize
-	 * @return BList - The list object that we want to return
+	 * @return ArrayList<BList> - The array list of objects that we want to return
 	 */
-	public static BList deserializeFromXML(String objectFileName)
+	public static ArrayList<BList> deserializeFromXML()
 	{
-		return XMLSerializer.<BList>deserializeFromXML(objectFileName);
+		return XMLSerializer.<BList>deserializeFromXML("BList");
 	}
 
 }

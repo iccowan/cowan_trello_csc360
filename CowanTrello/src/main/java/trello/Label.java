@@ -1,5 +1,7 @@
 package trello;
 
+import java.util.ArrayList;
+
 /**
  * Label Class
  *
@@ -21,6 +23,13 @@ public class Label
 	{
 		this.text = text;
 	}
+	
+	@Override
+	public boolean equals(Object thatObj)
+	{
+		Label that = (Label) thatObj;
+		return this.text.equals(that.text);
+	}
 
 	/**
 	 * @return the text
@@ -39,20 +48,19 @@ public class Label
 	}
 	
 	/**
-	 * @return String - The string of the file where the serialized object lives
+	 * @param all - Array list of all objects to serialize
 	 */
-	public String serializeToXML()
+	public static void serializeToXML(ArrayList<Label> all)
 	{
-		return XMLSerializer.<Label>serializeToXML(this);
+		XMLSerializer.<Label>serializeToXML(all, "Label");
 	}
 	
 	/**
-	 * @param objectFileName - File name where the object lives that we're going to deserialize
-	 * @return BList - The list object that we want to return
+	 * @return ArrayList<Label> - The array list of objects that we want to return
 	 */
-	public static Label deserializeFromXML(String objectFileName)
+	public static ArrayList<Label> deserializeFromXML()
 	{
-		return XMLSerializer.<Label>deserializeFromXML(objectFileName);
+		return XMLSerializer.<Label>deserializeFromXML("Label");
 	}
 
 }

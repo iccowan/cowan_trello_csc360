@@ -1,5 +1,7 @@
 package trello;
 
+import java.util.ArrayList;
+
 /**
  * Component Superclass
  *
@@ -57,10 +59,13 @@ public class Component
 		this.maxNum = maxNum;
 	}
 	
-	public boolean equals(Component that)
+	@Override
+	public boolean equals(Object thatObj)
 	{
+		Component that = (Component) thatObj;
+		
 		// Make sure the descriptions are the same
-		if (this.desc != that.desc)
+		if (! this.desc.equals(that.desc))
 			return false;
 		
 		// The same
@@ -68,20 +73,19 @@ public class Component
 	}
 	
 	/**
-	 * @return String - The string of the file where the serialized object lives
+	 * @param all - Array list of all objects to serialize
 	 */
-	public String serializeToXML()
+	public static void serializeToXML(ArrayList<Component> all)
 	{
-		return XMLSerializer.<Component>serializeToXML(this);
+		XMLSerializer.<Component>serializeToXML(all, "Component");
 	}
 	
 	/**
-	 * @param objectFileName - File name where the object lives that we're going to deserialize
-	 * @return Component - The list object that we want to return
+	 * @return ArrayList<Component> - The array list of objects that we want to return
 	 */
-	public static Component deserializeFromXML(String objectFileName)
+	public static ArrayList<Component> deserializeFromXML()
 	{
-		return XMLSerializer.<Component>deserializeFromXML(objectFileName);
+		return XMLSerializer.<Component>deserializeFromXML("Component");
 	}
 
 }

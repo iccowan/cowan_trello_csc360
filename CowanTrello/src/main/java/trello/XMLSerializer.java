@@ -7,10 +7,14 @@ import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * XMLSerializer Class
+ * 
+ * Pass an ArrayList of all the instances of an object in order
+ * to properly use this serializer. Then you can use the deserializer
+ * to get an ArrayList of all of the instances that have been serialized.
  *
  */
 public class XMLSerializer
@@ -19,57 +23,52 @@ public class XMLSerializer
 	/**
 	 * @param <T>    - Type of the object to serialize
 	 * @param object - Object to serialize
-	 * @return String - String of the serialized filename
+	 * @param String - Name of the class to serialize, for the filename
 	 */
-	public static <T> String serializeToXML(T object)
+	public static <T> void serializeToXML(ArrayList<T> objectList, String className)
 	{
 
 		XMLEncoder encoder = null;
-		String serializedFileName = "";
 
 		try
 		{
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			String timeStamp = String.valueOf(timestamp.getTime());
-			
-			serializedFileName = object.toString().substring(0, 19) + "_" + timeStamp + ".xml";
+			String serializedFileName =  className + ".xml";
 			encoder = new XMLEncoder(
 					new BufferedOutputStream(new FileOutputStream("serializedObjects/" + serializedFileName)));
 
 		}
 		catch (FileNotFoundException fileNotFound)
 		{
-			System.out.println("ERROR: While serializing " + object.toString() + "to XML");
+			System.out.println("ERROR: While serializing " + className + "to XML");
 		}
 
-		encoder.writeObject(object);
+		encoder.writeObject(objectList);
 		encoder.close();
-		
-		return serializedFileName;
 	}
 
 	/**
 	 * @param <T> - Type of the object to deserialize
-	 * @param fileName - File that contains the object to deserialize
-	 * @return T - The deserialized object that's created
+	 * @param className - Class to deserialize
+	 * @return ArrayList<T> - The deserialized object that's created
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T deserializeFromXML(String fileName)
+	public static <T> ArrayList<T> deserializeFromXML(String className)
 	{
 		XMLDecoder decoder = null;
 
 		try
 		{
-			decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("serializedObjects/" + fileName)));
+			String serializedFileName =  className + ".xml";
+			decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("serializedObjects/" + serializedFileName)));
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("ERROR: File " + fileName + " not found");
+			System.out.println("ERROR: File for " + className + " not found");
 		}
 		
-		T object = (T) decoder.readObject();
+		ArrayList<T> objectList = (ArrayList<T>) decoder.readObject();
 		
-		return object;
+		return objectList;
 	}
 
 }

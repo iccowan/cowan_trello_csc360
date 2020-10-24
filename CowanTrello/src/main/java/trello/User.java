@@ -11,7 +11,7 @@ public class User
 
 	private String name;
 	private String password;
-	private HasMembersList<Board> boards;
+	private HasMembersList<Board> boards = new HasMembersList<Board>();
 	
 	/**
 	 * Default constructor
@@ -26,8 +26,6 @@ public class User
 	{
 		this.name = name;
 		this.password = password;
-		
-		this.boards = new HasMembersList<Board>();
 	}
 
 	/**
@@ -59,6 +57,24 @@ public class User
 	{
 		return boards.removeMember(board);
 	}
+	
+	@Override
+	public boolean equals(Object thatObj)
+	{
+		User that = (User) thatObj;
+		
+		// Make sure the names and passwords are the same
+		// Ideally, the names should be unique for authentication purposes,
+		// so this should be all that we need to check
+		if (! this.name.equals(that.name))
+			return false;
+		
+		if (! this.password.equals(that.password))
+			return false;
+		
+		// If we get here, they're the same user
+		return true;
+	}
 
 	/**
 	 * @return the name
@@ -87,9 +103,9 @@ public class User
 	/**
 	 * @return the boards
 	 */
-	public ArrayList<Board> getBoards()
+	public HasMembersList<Board> getBoards()
 	{
-		return boards.getMembers();
+		return boards;
 	}
 
 	/**
@@ -109,20 +125,19 @@ public class User
 	}
 	
 	/**
-	 * @return String - The string of the file where the serialized object lives
+	 * @param all - Array list of all objects to serialize
 	 */
-	public String serializeToXML()
+	public static void serializeToXML(ArrayList<User> all)
 	{
-		return XMLSerializer.<User>serializeToXML(this);
+		XMLSerializer.<User>serializeToXML(all, "User");
 	}
 	
 	/**
-	 * @param objectFileName - File name where the object lives that we're going to deserialize
-	 * @return User - The list object that we want to return
+	 * @return ArrayList<User> - The array list of objects that we want to return
 	 */
-	public static User deserializeFromXML(String objectFileName)
+	public static ArrayList<User> deserializeFromXML()
 	{
-		return XMLSerializer.<User>deserializeFromXML(objectFileName);
+		return XMLSerializer.<User>deserializeFromXML("User");
 	}
 
 }

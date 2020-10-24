@@ -11,7 +11,8 @@ public class Board
 
 	private String name;
 	private User owner;
-	private HasMembersList<BList> lists;
+	private HasMembersSet<User> members = new HasMembersSet<User>();
+	private HasMembersList<BList> lists = new HasMembersList<BList>();
 	
 	/**
 	 * Default constructor
@@ -27,15 +28,17 @@ public class Board
 	{
 		this.name = name;
 		this.owner = owner;
-		this.lists = new HasMembersList<BList>();
+		this.members.addMember(owner);
+		owner.addBoard(this);
 	}
 
 	/**
 	 * @param list - List to add to the board
 	 */
-	public void addList(BList list)
+	public void addList(BList list, User requester)
 	{
-		lists.addMember(list);
+		if (hasMember(requester))
+			lists.addMember(list);
 	}
 
 	/**
@@ -43,14 +46,36 @@ public class Board
 	 * @return boolean - If the list is removed successfully, returns true
 	 * 					 If the list is not removed successfully, returns false
 	 */
-	public boolean removeList(BList list)
+	public boolean removeList(BList list, User requester)
 	{
-		return lists.removeMember(list);
+		if (hasMember(requester))
+			return lists.removeMember(list);
+		return false;
 	}
 	
 	public boolean hasList(BList list)
 	{
 		return lists.hasMember(list);
+	}
+	
+	public void addMember(User member, User requester)
+	{
+		if (requester.equals(owner))
+			this.members.addMember(member);
+	}
+	
+	public boolean removeMember(User member, User requester)
+	{
+		// Only let the owner remove members and don't let the
+		// owner remove themselves as a member
+		if (requester.equals(owner) && ! member.equals(owner))
+			return this.members.removeMember(member);
+		return false;
+	}
+	
+	public boolean hasMember(User member)
+	{
+		return members.hasMember(member);
 	}
 
 	/**
@@ -76,13 +101,21 @@ public class Board
 	{
 		return owner;
 	}
+	
+	/**
+	 * @return the members
+	 */
+	public HasMembersSet<User> getMembers()
+	{
+		return members;
+	}
 
 	/**
 	 * @return the lists
 	 */
-	public ArrayList<BList> getLists()
+	public HasMembersList<BList> getLists()
 	{
-		return lists.getMembers();
+		return lists;
 	}
 
 	/**
@@ -91,6 +124,14 @@ public class Board
 	public void setOwner(User owner)
 	{
 		this.owner = owner;
+	}
+	
+	/**
+	 * @param members the members to set
+	 */
+	public void setMembers(HasMembersSet<User> members)
+	{
+		this.members = members;
 	}
 
 	/**
@@ -105,10 +146,13 @@ public class Board
 	 * @param that - Board to compare
 	 * @return boolean
 	 */
-	public boolean equals(Board that)
+	@Override
+	public boolean equals(Object thatObj)
 	{
+		Board that = (Board) thatObj;
+		
 		// Make sure the names are the same
-		if (this.name != that.name)
+		if (! this.name.equals(that.name))
 			return false;
 		
 		// Make sure the owner is the same
@@ -130,20 +174,19 @@ public class Board
 	}
 	
 	/**
-	 * @return String - The string of the file where the serialized object lives
+	 * @param all - Array list of all objects to serialize
 	 */
-	public String serializeToXML()
+	public static void serializeToXML(ArrayList<Board> all)
 	{
-		return XMLSerializer.<Board>serializeToXML(this);
+		XMLSerializer.<Board>serializeToXML(all, "Board");
 	}
 	
 	/**
-	 * @param objectFileName - File name where the object lives that we're going to deserialize
-	 * @return Board - The list object that we want to return
+	 * @return ArrayList<Board> - The array list of objects that we want to return
 	 */
-	public static Board deserializeFromXML(String objectFileName)
+	public static ArrayList<Board> deserializeFromXML()
 	{
-		return XMLSerializer.<Board>deserializeFromXML(objectFileName);
+		return XMLSerializer.<Board>deserializeFromXML("Board");
 	}
 
 }

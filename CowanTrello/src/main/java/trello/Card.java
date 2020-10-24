@@ -1,7 +1,6 @@
 package trello;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Card Class
@@ -12,8 +11,9 @@ public class Card
 
 	private String name;
 	private BList list;
-	private HasMembersSet<Label> labels;
-	private HasMembersList<Component> components;
+	private HasMembersSet<Label> labels = new HasMembersSet<Label>();
+	private HasMembersSet<User> members = new HasMembersSet<User>();
+	private HasMembersList<Component> components = new HasMembersList<Component>();
 	
 	/**
 	 * Default constructor
@@ -28,8 +28,6 @@ public class Card
 	{
 		this.name = name;
 		this.list = list;
-		this.labels = new HasMembersSet<Label>();
-		this.components = new HasMembersList<Component>();
 	}
 
 	/**
@@ -38,15 +36,19 @@ public class Card
 	 * @return boolean - If the list is successfully switched, returns true
 	 * 					 If the list is unable to be switched, returns false
 	 */
-	public boolean switchList(BList newList, int newIndex)
+	public boolean switchList(BList newList, int newIndex, User requester)
 	{
+		// If the new list is not a part of the same board, we fail
+		if (! list.getBoard().equals(newList.getBoard()))
+			return false;
+		
 		// First, we need to let the current list know that we're leaving
 		// This method will return false if it's unable to do what we want
-		if(! list.removeCard(this))
+		if(! list.removeCard(this, requester))
 			return false;
 		
 		// Now, we're out of the list so let's continue adding to the new list
-		newList.addCard(newIndex, this);
+		newList.addCard(this, newIndex, requester);
 		
 		// Success
 		return true;
@@ -55,9 +57,10 @@ public class Card
 	/**
 	 * @param label - Label to be added to the card
 	 */
-	public void addLabel(Label label)
+	public void addLabel(Label label, User requester)
 	{
-		labels.addMember(label);
+		if (list.getBoard().hasMember(requester))
+			labels.addMember(label);
 	}
 	
 	/**
@@ -65,9 +68,11 @@ public class Card
 	 * @return boolean - If the label is removed successfully, returns true
 	 * 					 If the label is not removed successfully, returns false
 	 */
-	public boolean removeLabel(Label label)
+	public boolean removeLabel(Label label, User requester)
 	{
-		return labels.removeMember(label);
+		if (list.getBoard().hasMember(requester))
+			return labels.removeMember(label);
+		return false;
 	}
 	
 	/**
@@ -78,13 +83,32 @@ public class Card
 	{
 		return labels.hasMember(label);
 	}
+	
+	public void addMember(User member, User requester)
+	{
+		if (list.getBoard().getOwner().equals(requester))
+		members.addMember(member);
+	}
+	
+	public boolean removeMember(User member, User requester)
+	{
+		if (requester.equals(list.getBoard().getOwner()))
+			return this.members.removeMember(member);
+		return false;
+	}
+	
+	public boolean hasMember(User member)
+	{
+		return this.members.hasMember(member);
+	}
 
 	/**
 	 * @param component - Component to be added to the card
 	 */
-	public void addComponent(Component component)
+	public void addComponent(Component component, User requester)
 	{
-		components.addMember(component);
+		if (list.getBoard().hasMember(requester))
+			components.addMember(component);
 	}
 	
 	/**
@@ -92,9 +116,11 @@ public class Card
 	 * @return boolean  - If the component is removed successfully, returns true
 	 * 					  If the component is not removed successfully, returns false
 	 */
-	public boolean removeComponent(Component component)
+	public boolean removeComponent(Component component, User requester)
 	{
-		return components.removeMember(component);
+		if (list.getBoard().hasMember(requester))
+			return components.removeMember(component);
+		return false;
 	}
 	
 	/**
@@ -133,17 +159,25 @@ public class Card
 	/**
 	 * @return the labels
 	 */
-	public Set<Label> getLabels()
+	public HasMembersSet<Label> getLabels()
 	{
-		return labels.getMembers();
+		return labels;
+	}
+	
+	/*
+	 * @return the members
+	 */
+	public HasMembersSet<User> getMembers()
+	{
+		return members;
 	}
 
 	/**
 	 * @return the components
 	 */
-	public ArrayList<Component> getComponents()
+	public HasMembersList<Component> getComponents()
 	{
-		return components.getMembers();
+		return components;
 	}
 
 	/**
@@ -161,6 +195,14 @@ public class Card
 	{
 		this.labels = labels;
 	}
+	
+	/*
+	 * @param members the members to set
+	 */
+	public void setMembers(HasMembersSet<User> members)
+	{
+		this.members = members;
+	}
 
 	/**
 	 * @param components the components to set
@@ -174,10 +216,13 @@ public class Card
 	 * @param that - The card to check for equality
 	 * @return boolean - Whether or not the cards are equal
 	 */
-	public boolean equals(Card that)
+	@Override
+	public boolean equals(Object thatObj)
 	{
+		Card that = (Card) thatObj;
+		
 		// Make sure the names are the same
-		if (this.name != that.name)
+		if (! this.name.equals(that.name))
 			return false;
 		
 		// Make sure all of this labels belong to that card
@@ -205,20 +250,19 @@ public class Card
 	}
 	
 	/**
-	 * @return String - The string of the file where the serialized object lives
+	 * @param all - Array list of all objects to serialize
 	 */
-	public String serializeToXML()
+	public static void serializeToXML(ArrayList<Card> all)
 	{
-		return XMLSerializer.<Card>serializeToXML(this);
+		XMLSerializer.<Card>serializeToXML(all, "Card");
 	}
 	
 	/**
-	 * @param objectFileName - File name where the object lives that we're going to deserialize
-	 * @return Card - The list object that we want to return
+	 * @return ArrayList<Card> - The array list of objects that we want to return
 	 */
-	public static Card deserializeFromXML(String objectFileName)
+	public static ArrayList<Card> deserializeFromXML()
 	{
-		return XMLSerializer.<Card>deserializeFromXML(objectFileName);
+		return XMLSerializer.<Card>deserializeFromXML("Card");
 	}
 	
 }

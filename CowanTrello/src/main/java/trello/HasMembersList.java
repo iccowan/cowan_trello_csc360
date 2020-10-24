@@ -1,6 +1,7 @@
 package trello;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  *
  * @param <T> - Type for the ArrayList
  */
-public class HasMembersList<T> extends HasMembers<T>
+public class HasMembersList<T> implements HasMembers<T>
 {
 	
 	private ArrayList<T> members = new ArrayList<T>();
@@ -57,6 +58,41 @@ public class HasMembersList<T> extends HasMembers<T>
 
 		// Success
 		return true;
+	}
+	
+	/**
+	 * @param member - Member to see if it exists here
+	 * @return boolean - Returns whether or not it exists here
+	 */
+	public boolean hasMember(T member)
+	{
+		// Check every member and see if the member equals it
+		for (T m : members)
+			if (member.equals(m))
+				return true; // Here
+		
+		// Not here
+		return false;
+	}
+	
+	/**
+	 * @return boolean - Whether or not the collections of T are equal
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean equals(Object thatObj)
+	{
+		HasMembersList<T> that = (HasMembersList<T>) thatObj;
+		
+		return this.members.equals(that.members);
+	}
+	
+	/**
+	 * @return Iterator<T> - Returns an iterator for the set
+	 */
+	public Iterator<T> iterator()
+	{
+		return new HasMembersIterator<T>(members);
 	}
 	
 	/**
