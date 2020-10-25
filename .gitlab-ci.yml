@@ -6,4 +6,5 @@ stages:
 test:
   stage: test
   script:
+    - "cd CowanTrello"
     - "mvn verify"
