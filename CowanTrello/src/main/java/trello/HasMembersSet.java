@@ -14,11 +14,13 @@ public class HasMembersSet<T> implements HasMembers<T>
 {
 
 	private Set<T> members = new HashSet<T>();
-	
+
 	/**
 	 * Default constructor
 	 */
-	public HasMembersSet() {}
+	public HasMembersSet()
+	{
+	}
 
 	/**
 	 * @param member - User to be added as a member
@@ -29,9 +31,8 @@ public class HasMembersSet<T> implements HasMembers<T>
 	}
 
 	/**
-	 * @param member   - Member to remove from the members set
-	 * @return boolean - If the member is removed successfully, returns true
-	 * 					 If the member is not removed successfully, returns false
+	 * @param member - Member to remove from the members set
+	 * @return boolean - Returns whether or not the member was removed successfully
 	 */
 	public boolean removeMember(T member)
 	{
@@ -45,7 +46,7 @@ public class HasMembersSet<T> implements HasMembers<T>
 		// Success
 		return true;
 	}
-	
+
 	/**
 	 * @param member - Member to see if it exists here
 	 * @return boolean - Returns whether or not it exists here
@@ -56,11 +57,11 @@ public class HasMembersSet<T> implements HasMembers<T>
 		for (T m : members)
 			if (member.equals(m))
 				return true; // Here
-		
+
 		// Not here
 		return false;
 	}
-	
+
 	/**
 	 * @return boolean - Whether or not the collections of T are equal
 	 */
@@ -69,10 +70,10 @@ public class HasMembersSet<T> implements HasMembers<T>
 	public boolean equals(Object thatObject)
 	{
 		HasMembersSet<T> that = (HasMembersSet<T>) thatObject;
-		
+
 		return this.members.equals(that.members);
 	}
-	
+
 	/**
 	 * @return Iterator<T> - Returns an iterator for the set
 	 */
@@ -80,7 +81,7 @@ public class HasMembersSet<T> implements HasMembers<T>
 	{
 		return new HasMembersIterator<T>(members);
 	}
-	
+
 	/**
 	 * @return the members
 	 */
@@ -96,5 +97,5 @@ public class HasMembersSet<T> implements HasMembers<T>
 	{
 		this.members = members;
 	}
-	
+
 }

@@ -11,11 +11,13 @@ public class Component
 
 	private String desc;
 	private int maxNum;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public Component() {}
+	public Component()
+	{
+	}
 
 	/**
 	 * @param desc   - The description of the component
@@ -58,20 +60,24 @@ public class Component
 	{
 		this.maxNum = maxNum;
 	}
-	
+
+	/**
+	 * @param thatObj - The object to compare for equality
+	 * @return boolean - Whether or not the objects are equal
+	 */
 	@Override
 	public boolean equals(Object thatObj)
 	{
 		Component that = (Component) thatObj;
-		
+
 		// Make sure the descriptions are the same
 		if (! this.desc.equals(that.desc))
 			return false;
-		
+
 		// The same
 		return true;
 	}
-	
+
 	/**
 	 * @param all - Array list of all objects to serialize
 	 */
@@ -79,9 +85,10 @@ public class Component
 	{
 		XMLSerializer.<Component>serializeToXML(all, "Component");
 	}
-	
+
 	/**
-	 * @return ArrayList<Component> - The array list of objects that we want to return
+	 * @return ArrayList<Component> - The array list of objects that we want to
+	 *         return
 	 */
 	public static ArrayList<Component> deserializeFromXML()
 	{

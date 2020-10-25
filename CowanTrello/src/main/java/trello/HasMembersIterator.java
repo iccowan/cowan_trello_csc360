@@ -3,19 +3,19 @@ package trello;
 import java.util.Collection;
 import java.util.Iterator;
 
-
 /**
  * HasMembersIterator Class
+ * 
  * @param <T> - Type for the Set
  * 
- * This will allow for iteration over the HasMembersList/Set
+ *            This will allow for iteration over the HasMembersList/Set
  *
  */
 public class HasMembersIterator<T> implements Iterator<T>
 {
-	
+
 	private Iterator<T> listIt;
-	
+
 	/**
 	 * @param col - The collection to iterate over
 	 */
@@ -25,7 +25,8 @@ public class HasMembersIterator<T> implements Iterator<T>
 	}
 
 	/**
-	 * @return boolean - Returns whether or not there is a next value in the collection
+	 * @return boolean - Returns whether or not there is a next value in the
+	 *         collection
 	 */
 	@Override
 	public boolean hasNext()
@@ -33,7 +34,6 @@ public class HasMembersIterator<T> implements Iterator<T>
 		return listIt.hasNext();
 	}
 
-	
 	/**
 	 * @return T - Returns the next value in the collection
 	 */

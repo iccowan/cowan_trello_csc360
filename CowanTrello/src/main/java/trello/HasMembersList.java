@@ -11,13 +11,15 @@ import java.util.Iterator;
  */
 public class HasMembersList<T> implements HasMembers<T>
 {
-	
+
 	private ArrayList<T> members = new ArrayList<T>();
-	
+
 	/**
 	 * Default constructor
 	 */
-	public HasMembersList() {}
+	public HasMembersList()
+	{
+	}
 
 	/**
 	 * @param member - Member to be added as a member
@@ -26,7 +28,7 @@ public class HasMembersList<T> implements HasMembers<T>
 	{
 		members.add(member);
 	}
-	
+
 	/**
 	 * @param member - Member to add
 	 * @param index  - Index for the new member to be added
@@ -35,16 +37,15 @@ public class HasMembersList<T> implements HasMembers<T>
 	{
 		// If the index is not valid, add to the end of the list
 		// If the index is valid, add to that index
-		if(index < 0 || index >= members.size())
+		if (index < 0 || index >= members.size())
 			members.add(member);
 		else
 			members.add(index, member);
 	}
-	
+
 	/**
-	 * @param member   - Member to remove from the members set
-	 * @return boolean - If the member is removed successfully, returns true
-	 * 					 If the member is not removed successfully, returns false
+	 * @param member - Member to remove from the members set
+	 * @return boolean - Returns whether or not the member was removed successfully
 	 */
 	public boolean removeMember(T member)
 	{
@@ -59,7 +60,7 @@ public class HasMembersList<T> implements HasMembers<T>
 		// Success
 		return true;
 	}
-	
+
 	/**
 	 * @param member - Member to see if it exists here
 	 * @return boolean - Returns whether or not it exists here
@@ -70,11 +71,11 @@ public class HasMembersList<T> implements HasMembers<T>
 		for (T m : members)
 			if (member.equals(m))
 				return true; // Here
-		
+
 		// Not here
 		return false;
 	}
-	
+
 	/**
 	 * @return boolean - Whether or not the collections of T are equal
 	 */
@@ -83,10 +84,10 @@ public class HasMembersList<T> implements HasMembers<T>
 	public boolean equals(Object thatObj)
 	{
 		HasMembersList<T> that = (HasMembersList<T>) thatObj;
-		
+
 		return this.members.equals(that.members);
 	}
-	
+
 	/**
 	 * @return Iterator<T> - Returns an iterator for the set
 	 */
@@ -94,7 +95,7 @@ public class HasMembersList<T> implements HasMembers<T>
 	{
 		return new HasMembersIterator<T>(members);
 	}
-	
+
 	/**
 	 * @return the members
 	 */
@@ -110,5 +111,5 @@ public class HasMembersList<T> implements HasMembers<T>
 	{
 		this.members = members;
 	}
-	
+
 }

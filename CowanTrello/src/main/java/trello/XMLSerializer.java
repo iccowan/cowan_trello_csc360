@@ -12,9 +12,9 @@ import java.util.ArrayList;
 /**
  * XMLSerializer Class
  * 
- * Pass an ArrayList of all the instances of an object in order
- * to properly use this serializer. Then you can use the deserializer
- * to get an ArrayList of all of the instances that have been serialized.
+ * Pass an ArrayList of all the instances of an object in order to properly use
+ * this serializer. Then you can use the deserializer to get an ArrayList of all
+ * of the instances that have been serialized.
  *
  */
 public class XMLSerializer
@@ -32,7 +32,7 @@ public class XMLSerializer
 
 		try
 		{
-			String serializedFileName =  className + ".xml";
+			String serializedFileName = className + ".xml";
 			encoder = new XMLEncoder(
 					new BufferedOutputStream(new FileOutputStream("serializedObjects/" + serializedFileName)));
 
@@ -47,7 +47,7 @@ public class XMLSerializer
 	}
 
 	/**
-	 * @param <T> - Type of the object to deserialize
+	 * @param <T>       - Type of the object to deserialize
 	 * @param className - Class to deserialize
 	 * @return ArrayList<T> - The deserialized object that's created
 	 */
@@ -58,16 +58,17 @@ public class XMLSerializer
 
 		try
 		{
-			String serializedFileName =  className + ".xml";
-			decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("serializedObjects/" + serializedFileName)));
+			String serializedFileName = className + ".xml";
+			decoder = new XMLDecoder(
+					new BufferedInputStream(new FileInputStream("serializedObjects/" + serializedFileName)));
 		}
 		catch (FileNotFoundException e)
 		{
 			System.out.println("ERROR: File for " + className + " not found");
 		}
-		
+
 		ArrayList<T> objectList = (ArrayList<T>) decoder.readObject();
-		
+
 		return objectList;
 	}
 

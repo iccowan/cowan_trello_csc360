@@ -12,12 +12,14 @@ public class BList
 	private String name;
 	private HasMembersList<Card> cards = new HasMembersList<Card>();
 	private Board board;
-	
+
 	/*
 	 * Default Constructor
 	 */
-	public BList() {}
-	
+	public BList()
+	{
+	}
+
 	/**
 	 * @param name
 	 * @param board
@@ -36,7 +38,7 @@ public class BList
 		if (board.hasMember(requester))
 			cards.addMember(card);
 	}
-	
+
 	/**
 	 * @param card  - Card to add to the board
 	 * @param index - Index for the new card to be added
@@ -49,8 +51,8 @@ public class BList
 
 	/**
 	 * @param card - Card to remove from the list
-	 * @return boolean - If the card is removed successfully, returns true
-	 * 					 If the card is not removed successfully, returns false
+	 * @return boolean - Returns true or false depending on whether or not the card
+	 *         was removed successfully
 	 */
 	public boolean removeCard(Card card, User requester)
 	{
@@ -60,26 +62,26 @@ public class BList
 	}
 
 	/**
-	 * @param card     - Card to move in the list
-	 * @param index    - New index in the list for the card
-	 * @return boolean - If the card is moved successfully, returns true
-	 * 					 If the card is not moved successfully, returns false
+	 * @param card  - Card to move in the list
+	 * @param index - New index in the list for the card
+	 * @return boolean - Returns true or false depending on whether or not the card
+	 *         was moved successfully
 	 */
 	public boolean moveCard(Card card, int index, User requester)
 	{
 		if (board.hasMember(requester))
 		{
-			if(! cards.removeMember(card))
+			if (! cards.removeMember(card))
 				return false;
-			
+
 			cards.addMember(index, card);
-			
+
 			// Success
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @param c - Card that we want to check and see if it exists here
 	 * @return boolean - Returns whether or not the card exists here
@@ -120,7 +122,7 @@ public class BList
 	{
 		return board;
 	}
-	
+
 	/**
 	 * @param cards the cards to set
 	 */
@@ -136,7 +138,7 @@ public class BList
 	{
 		this.board = board;
 	}
-	
+
 	/**
 	 * @param that - List to compare
 	 * @return boolean
@@ -145,25 +147,25 @@ public class BList
 	public boolean equals(Object thatObj)
 	{
 		BList that = (BList) thatObj;
-		
+
 		// If the names aren't the same, not equal
 		if (! this.name.equals(that.name))
 			return false;
-		
+
 		// Make sure all of this cards belong to that board
-		for(Card c : this.cards)
+		for (Card c : this.cards)
 			if (! that.hasCard(c))
 				return false;
-		
+
 		// Make sure all of that cards belong to that board
-		for(Card c : that.cards)
-			if(! this.hasCard(c))
+		for (Card c : that.cards)
+			if (! this.hasCard(c))
 				return false;
-			
+
 		// Equal
 		return true;
 	}
-	
+
 	/**
 	 * @param all - Array list of all objects to serialize
 	 */
@@ -171,7 +173,7 @@ public class BList
 	{
 		XMLSerializer.<BList>serializeToXML(all, "BList");
 	}
-	
+
 	/**
 	 * @return ArrayList<BList> - The array list of objects that we want to return
 	 */

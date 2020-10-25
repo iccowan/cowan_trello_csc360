@@ -12,11 +12,13 @@ public class User
 	private String name;
 	private String password;
 	private HasMembersList<Board> boards = new HasMembersList<Board>();
-	
+
 	/**
 	 * Default constructor
 	 */
-	public User() {}
+	public User()
+	{
+	}
 
 	/**
 	 * @param name     - The name of the user that we are creating
@@ -31,8 +33,7 @@ public class User
 	/**
 	 * @param name     - The name of the user to login
 	 * @param password - The password of the user to login
-	 * @return User - Returns true if the name and password match
-	 * 				  Returns false if the name and password don't match
+	 * @return boolean - Returns whether or not the login was successful
 	 */
 	public boolean login(String name, String password)
 	{
@@ -42,6 +43,9 @@ public class User
 			return false;
 	}
 
+	/**
+	 * @param board - The board to add to the user
+	 */
 	public void addBoard(Board board)
 	{
 		// Add the board to the user's list of boards
@@ -50,28 +54,32 @@ public class User
 
 	/**
 	 * @param board - The board to remove from the user's boards
-	 * @return boolean - If the board is removed successfully, returns true
-	 * 					 If the board is not removed successfully, returns false
+	 * @return boolean - If the board is removed successfully, returns true If the
+	 *         board is not removed successfully, returns false
 	 */
 	public boolean removeBoard(Board board)
 	{
 		return boards.removeMember(board);
 	}
-	
+
+	/**
+	 * @param thatObj - The user to check for equality
+	 * @return boolean - Whether or not the users are equal
+	 */
 	@Override
 	public boolean equals(Object thatObj)
 	{
 		User that = (User) thatObj;
-		
+
 		// Make sure the names and passwords are the same
 		// Ideally, the names should be unique for authentication purposes,
 		// so this should be all that we need to check
 		if (! this.name.equals(that.name))
 			return false;
-		
+
 		if (! this.password.equals(that.password))
 			return false;
-		
+
 		// If we get here, they're the same user
 		return true;
 	}
@@ -123,7 +131,7 @@ public class User
 	{
 		this.boards = boards;
 	}
-	
+
 	/**
 	 * @param all - Array list of all objects to serialize
 	 */
@@ -131,7 +139,7 @@ public class User
 	{
 		XMLSerializer.<User>serializeToXML(all, "User");
 	}
-	
+
 	/**
 	 * @return ArrayList<User> - The array list of objects that we want to return
 	 */

@@ -10,11 +10,13 @@ public class Label
 {
 
 	private String text;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public Label() {}
+	public Label()
+	{
+	}
 
 	/**
 	 * @param text
@@ -23,7 +25,11 @@ public class Label
 	{
 		this.text = text;
 	}
-	
+
+	/**
+	 * @param thatObj - The object to compare for equality
+	 * @return boolean - Whether or not the objects are equal
+	 */
 	@Override
 	public boolean equals(Object thatObj)
 	{
@@ -46,7 +52,7 @@ public class Label
 	{
 		this.text = text;
 	}
-	
+
 	/**
 	 * @param all - Array list of all objects to serialize
 	 */
@@ -54,7 +60,7 @@ public class Label
 	{
 		XMLSerializer.<Label>serializeToXML(all, "Label");
 	}
-	
+
 	/**
 	 * @return ArrayList<Label> - The array list of objects that we want to return
 	 */

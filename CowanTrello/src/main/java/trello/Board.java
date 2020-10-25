@@ -13,12 +13,13 @@ public class Board
 	private User owner;
 	private HasMembersSet<User> members = new HasMembersSet<User>();
 	private HasMembersList<BList> lists = new HasMembersList<BList>();
-	
+
 	/**
 	 * Default constructor
 	 */
-	
-	public Board() {}
+	public Board()
+	{
+	}
 
 	/**
 	 * @param name  - Name of the board to be created
@@ -43,8 +44,8 @@ public class Board
 
 	/**
 	 * @param list - List to remove from the board
-	 * @return boolean - If the list is removed successfully, returns true
-	 * 					 If the list is not removed successfully, returns false
+	 * @return boolean - Returns true or false depending on whether or not the list
+	 *         was removed successfully
 	 */
 	public boolean removeList(BList list, User requester)
 	{
@@ -52,18 +53,33 @@ public class Board
 			return lists.removeMember(list);
 		return false;
 	}
-	
+
+	/**
+	 * @param list - The list to check and see if it exists
+	 * @return boolean - Returns true or false depending on whether or not the list
+	 *         exists
+	 */
 	public boolean hasList(BList list)
 	{
 		return lists.hasMember(list);
 	}
-	
+
+	/**
+	 * @param member    - User to add
+	 * @param requester - Requesting user, should be the owner
+	 */
 	public void addMember(User member, User requester)
 	{
 		if (requester.equals(owner))
 			this.members.addMember(member);
 	}
-	
+
+	/**
+	 * @param member    - User to remove
+	 * @param requester - Requesting user, should be the owner
+	 * @return boolean - Returns true or false depending on whether or not the
+	 *         member was removed successfully
+	 */
 	public boolean removeMember(User member, User requester)
 	{
 		// Only let the owner remove members and don't let the
@@ -72,7 +88,11 @@ public class Board
 			return this.members.removeMember(member);
 		return false;
 	}
-	
+
+	/**
+	 * @param member - User to check if they exist as a member
+	 * @return boolean - Returns depending on whether the member exists or not
+	 */
 	public boolean hasMember(User member)
 	{
 		return members.hasMember(member);
@@ -101,7 +121,7 @@ public class Board
 	{
 		return owner;
 	}
-	
+
 	/**
 	 * @return the members
 	 */
@@ -125,7 +145,7 @@ public class Board
 	{
 		this.owner = owner;
 	}
-	
+
 	/**
 	 * @param members the members to set
 	 */
@@ -141,7 +161,7 @@ public class Board
 	{
 		this.lists = lists;
 	}
-	
+
 	/**
 	 * @param that - Board to compare
 	 * @return boolean
@@ -150,29 +170,29 @@ public class Board
 	public boolean equals(Object thatObj)
 	{
 		Board that = (Board) thatObj;
-		
+
 		// Make sure the names are the same
 		if (! this.name.equals(that.name))
 			return false;
-		
+
 		// Make sure the owner is the same
 		if (! this.owner.equals(that.owner))
 			return false;
-		
+
 		// Make sure all of this lists are contained within that
 		for (BList l : this.lists)
 			if (! that.hasList(l))
 				return false;
-		
+
 		// Make sure all of that lists are contained within this
 		for (BList l : that.lists)
-			if(! this.hasList(l))
+			if (! this.hasList(l))
 				return false;
-		
+
 		// Everything is the same
 		return true;
 	}
-	
+
 	/**
 	 * @param all - Array list of all objects to serialize
 	 */
@@ -180,7 +200,7 @@ public class Board
 	{
 		XMLSerializer.<Board>serializeToXML(all, "Board");
 	}
-	
+
 	/**
 	 * @return ArrayList<Board> - The array list of objects that we want to return
 	 */

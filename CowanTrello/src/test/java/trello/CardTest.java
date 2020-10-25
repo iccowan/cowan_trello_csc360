@@ -320,19 +320,143 @@ class CardTest
 	@Test
 	void testAddComponent()
 	{
-		fail("Not yet implemented");
+		// Let's make sure the owner can add a component
+		Component com = new Component("com1", 1);
+		c1.addComponent(com, c1Owner);
+		
+		assertTrue(c1.hasComponent(com));
+		
+		// Let's create a new user and make sure they cannot add a component
+		Component com2 = new Component("com2", 1);
+		User newUser = new User("newuser", "p");
+		c1.addComponent(com2, newUser);
+		
+		assertFalse(c1.hasComponent(com2));
+		
+		// Now, let's add the user to the members and make sure they can
+		// add the component now
+		c1.getList().getBoard().addMember(newUser, c1Owner);
+		c1.addComponent(com2, newUser);
+		
+		assertTrue(c1.hasComponent(com2));
+		
+		// Now, we're going to make sure if we remove the user,
+		// they can no longer add a component
+		c1.getList().getBoard().removeMember(newUser, c1Owner);
+		Component com3 = new Component("com3", 1);
+		c1.addComponent(com3, newUser);
+		
+		assertFalse(c1.hasComponent(com3));
 	}
 
 	@Test
 	void testRemoveComponent()
 	{
-		fail("Not yet implemented");
+		// Let's add some components for testing
+		ArrayList<Component> components = new ArrayList<Component>();
+		for (int i = 1; i <= 4; i++)
+		{
+			Component com = new Component("com" + String.valueOf(i), 1);
+			components.add(com);
+			c1.addComponent(com, c1Owner);
+		}
+		
+		// Create another component that we'll never add to the card
+		// for testing
+		Component foreignComponent = new Component("foreign com", 1);
+		
+		// Let's make sure the owner can remove a list
+		assertTrue(c1.removeComponent(components.get(3), c1Owner));
+		
+		assertFalse(c1.hasComponent(components.get(3)));
+		
+		// Add it back
+		c1.addComponent(components.get(3), c1Owner);
+		
+		// Let's create a new user and make sure they cannot remove a com
+		User newUser = new User("newuser", "p");
+		assertFalse(c1.removeComponent(components.get(3), newUser));
+		
+		assertTrue(c1.hasComponent(components.get(3)));
+		
+		// Now, let's add the user to the members of the board and make sure they can
+		// remove the com now
+		c1.getList().getBoard().addMember(newUser, c1Owner);
+		assertTrue(c1.removeComponent(components.get(3), newUser));
+		
+		assertFalse(c1.hasComponent(components.get(3)));
+		
+		// Add it back
+		c1.addComponent(components.get(3), c1Owner);
+		
+		// Now, we're going to make sure if we remove the user,
+		// they can no longer remove a component
+		c1.getList().getBoard().removeMember(newUser, c1Owner);
+		assertFalse(c1.removeComponent(components.get(3), newUser));
+		
+		assertTrue(c1.hasComponent(components.get(3)));
+		
+		// Now, let's make sure we can remove any com, not just the last
+		assertTrue(c1.removeComponent(components.get(1), c1Owner));
+		assertFalse(c1.hasComponent(components.get(1)));
+		components.remove(1); // Remove here now for testing
+		
+		// Remove more than one com
+		assertTrue(c1.removeComponent(components.get(0), c1Owner));
+		assertFalse(c1.hasComponent(components.get(0)));
+		components.remove(0); // Remove here now for testing
+		
+		// Let's make sure we can't remove a label that doesn't exist in the list
+		assertFalse(c1.removeComponent(foreignComponent, c1Owner));
+		
+		// Now, remove the last 2 labels remaining and make sure we cannot remove
+		// any lists once all labels are gone
+		for (int i = 0; i < 3; i++)
+		{
+			if (i < 2)
+			{
+				assertTrue(c1.removeComponent(components.get(0), c1Owner));
+				assertFalse(c1.hasComponent(components.get(0)));
+				components.remove(0); // Remove here now for testing
+			}
+			else
+			{
+				assertFalse(c1.removeComponent(foreignComponent, c1Owner));
+			}
+		}
 	}
 
 	@Test
 	void testHasComponent()
 	{
-		fail("Not yet implemented");
+		// Let's add some components for testing
+		ArrayList<Component> components = new ArrayList<Component>();
+		for (int i = 1; i <= 4; i++)
+		{
+			Component com = new Component("com" + String.valueOf(i), 1);
+			components.add(com);
+			c1.addComponent(com, c1Owner);
+		}
+		
+		// Create another component that we'll never add to the list
+		// for testing
+		Component foreignCom = new Component("foreign com", 1);
+		Component temp;
+		
+		// Let's make sure that all of the coms that we added are actually
+		// found in the list
+		for (Component com : components)
+			assertTrue(c1.hasComponent(com));
+		
+		// Let's make sure that a label not in the list shows as not being there
+		assertFalse(c1.hasComponent(foreignCom));
+		
+		// Let's remove a component and make sure that the com doesn't show as being there
+		c1.removeComponent(components.get(0), c1Owner);
+		temp = components.get(0);
+		components.remove(0); // Keep this list the same for testing
+		
+		assertFalse(c1.hasComponent(temp));
 	}
 
 	@Test
