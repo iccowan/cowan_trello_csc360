@@ -9,3 +9,4 @@ target/
 
 # Custom Ignores
 .dbinfo
+serializedObjects/*
