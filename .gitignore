@@ -9,5 +9,5 @@ target/
 
 # Custom Ignores
 .dbinfo
-serializedObjects/*
-!serializedObjects/.hidden
+CowanTrello/serializedObjects/*
+!CowanTrello/serializedObjects/.hidden
