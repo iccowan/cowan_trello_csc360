@@ -1,0 +1,53 @@
+package trelloServer;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
+class TrelloServerTest
+{
+
+	@BeforeEach
+	void setUp() throws Exception
+	{
+	}
+
+	@Test
+	void testAuthenticateUser()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetBoard()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCreateBoard()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testUpdateBoard()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testStartServer()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCloseServer()
+	{
+		fail("Not yet implemented");
+	}
+
+}

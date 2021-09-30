@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=CowanTrello/\/Library\/Java\/JavaVirtualMachines\/jdk1.8.0_261.jdk\/Contents\/Home\/jre\/lib\/rt.jar=/maven.pomderived=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/javase\/8\/docs\/api\/=/&lt;java.util(Iterator.class[Iterator" modifiers="1537" timestamp="1592463291000"/>
+    <typeInfo handle="=CowanTrello/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;trello{Board.java[Board" modifiers="1" timestamp="1603903608000"/>
+    <typeInfo handle="=CowanTrello/\/Library\/Java\/JavaVirtualMachines\/jdk1.8.0_261.jdk\/Contents\/Home\/jre\/lib\/rt.jar=/maven.pomderived=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/javase\/8\/docs\/api\/=/&lt;java.rmi(Remote.class[Remote" modifiers="1537" timestamp="1592463291000"/>
+    <typeInfo handle="=CowanTrello/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;trelloServer{TrelloServerInterface.java[TrelloServerInterface" modifiers="513" timestamp="1603929270000"/>
+    <typeInfo handle="=CowanTrello/\/Library\/Java\/JavaVirtualMachines\/jdk1.8.0_261.jdk\/Contents\/Home\/jre\/lib\/rt.jar=/maven.pomderived=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/javase\/8\/docs\/api\/=/&lt;java.lang(Exception.class[Exception" modifiers="33" timestamp="1592463291000"/>
+</typeInfoHistroy>

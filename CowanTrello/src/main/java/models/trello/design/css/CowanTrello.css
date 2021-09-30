@@ -1,0 +1,68 @@
+@import "com/sun/javafx/scene/control/skin/caspian/caspian.css";
+
+#newViewVBox {
+	-fx-border-color: darkgrey;
+	-fx-border-style: solid;
+	-fx-border-width: 2px 0 2px 2px;
+	-fx-border-radius: 30px 0 0 30px;
+}
+
+.root, .userPageVBox {
+	-fx-background-color: #073B4C;
+	-fx-color: #06D6A0;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+.choice-box {
+	-fx-color: white;
+}
+
+.tool-bar:horizontal {
+	-fx-background-color:
+	        linear-gradient(to bottom, derive(#118AB2,-30%), derive(#118AB2,-60%)),
+        	linear-gradient(to bottom, derive(#118AB2,65%) 2%, derive(#118AB2,-20%) 95%);
+}
+
+.list-view {
+	-fx-background-color: grey;
+}
+
+.list-cell {
+	-fx-background-color: rgba(7, 59, 76, 0.5);
+	-fx-text-fill: black;
+}
+
+.list-cell:odd {
+	-fx-background-color: rgba(17, 138, 178, 0.5);
+	-fx-text-fill: black;
+}
+
+.list-cell:filled:hover {
+	-fx-background-color: rgba(255, 209, 102, 0.3);
+}
+
+.text-field, .text-field:focused {
+	-fx-background-color: rgba(17, 138, 178, 0.5);
+	-fx-text-fill: white;
+}
+
+.boardScrollPane, .boardScrollPane:focused {
+	-fx-background-color: rgba(7, 59, 76, 0.1);
+}
+
+.listTitledPane {
+	-fx-background-color: #06D6A0;
+	-fx-text-fill: black;
+}
+
+.titled-pane:focused > .title {
+	-fx-background-color: rgba(255, 209, 102, 0.3);
+	-fx-text-fill: black;
+}
+
+#labelsLabel, #componentsLabel, #membersLabel {
+	-fx-text-fill: black;
+}

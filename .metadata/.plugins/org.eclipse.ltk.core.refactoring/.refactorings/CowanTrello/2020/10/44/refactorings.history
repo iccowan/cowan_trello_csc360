@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;UserNotFoundException.java&apos; to &apos;CowanTrello/src/main/java/trelloServer&apos;&#x0A;- Original project: &apos;CowanTrello&apos;&#x0A;- Destination element: &apos;CowanTrello/src/main/java/trelloServer&apos;&#x0A;- Original element: &apos;trelloServer.UserNotFoundException.java&apos;" description="Copy compilation unit" destination="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;trelloServer" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;trelloServer{UserNotFoundException.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1603903742309" units="1" version="1.0"/>
+</session>

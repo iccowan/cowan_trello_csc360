@@ -1,0 +1,9 @@
+package trelloServer;
+
+import java.rmi.Remote;
+
+
+public class TrelloServerInterface implements Remote
+{
+
+}

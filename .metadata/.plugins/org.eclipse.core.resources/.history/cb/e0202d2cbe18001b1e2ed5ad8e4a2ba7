@@ -1,0 +1,112 @@
+package trelloServer;
+
+import java.io.IOException;
+import java.rmi.*;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.*;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+import trello.*;
+
+/**
+ * TrelloServer
+ * @implements TrelloServerInterface
+ *
+ */
+public class TrelloServer extends UnicastRemoteObject implements TrelloServerInterface
+{
+
+	private static final long serialVersionUID = -7496452202861199863L;
+	
+	private ArrayList<User> users;
+	private ArrayList<Board> boards;
+	
+	public TrelloServer() throws RemoteException
+	{
+		// Load the users and the boards from the XML files on the disk
+		users = User.deserializeFromXML();
+		boards = Board.deserializeFromXML();
+	}
+	
+	@Override
+	public User authenticateUser(String username, String password) throws RemoteException, UserNotFoundException
+	{
+		// Loop through all of our users and find the user
+		for (User u : users)
+			if (u.login(username, password))
+				return u;
+		
+		// If we get here, there's no user that exists with the credentials
+		throw new UserNotFoundException("User " + username + " not found");
+	}
+
+	@Override
+	public Board createBoard(String name, User requester) throws RemoteException
+	{
+		// Create a new board and return it
+		// The requester will be the owner of the board
+		Board newBoard = new Board(name, requester);
+		boards.add(newBoard);
+		
+		return newBoard;
+	}
+
+	@Override
+	public Board getBoard(String name, User requester) throws RemoteException
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean updateBoard(Board oldBoard, Board newBoard, User requester) throws RemoteException
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static void main(String[] args)
+	{
+		try
+		{
+			// Create the registry, server, and bind it
+			Registry rmiregistry = LocateRegistry.getRegistry(1099);
+			if (rmiregistry == null)
+				rmiregistry = LocateRegistry.createRegistry(1099);
+			
+			TrelloServer server = new TrelloServer();
+			rmiregistry.rebind("COWAN_TRELLO_SERVER", server);
+			
+			// Let them know the server is running
+			System.out.println("COWAN_TRELLO_SERVER RMI Registry is running on port 1099...");
+			
+			// Now, the server is started and we wait for the EOF key
+			// CTRL + D
+			Scanner inScanner = new Scanner(System.in);
+			while (inScanner.hasNext())
+				inScanner.nextLine();
+			
+			// Now, the user has ended the program
+			// Close the scanner
+			inScanner.close();
+			
+			// Close the server
+			rmiregistry.unbind("COWAN_TRELLO_SERVER");
+			
+			// Save the users and boards
+			User.serializeToXML(server.users);
+			Board.serializeToXML(server.boards);
+			
+			System.out.println("COWAN_TRELLO_SERVER Closed");
+		}
+		catch (IOException | NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MasterController">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" styleClass="masterToolBar" BorderPane.alignment="CENTER">
+        <items>
+          <Button id="backButton" fx:id="backButton" disable="true" mnemonicParsing="false" onAction="#backButton_OnClick" text="Back">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button id="saveButton" fx:id="saveButton" disable="true" mnemonicParsing="false" onAction="#saveButton_OnClick" text="Save">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button id="exitButton" mnemonicParsing="false" onAction="#exitButton_OnClick" text="Exit">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+        </items>
+      </ToolBar>
+   </top>
+</BorderPane>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="pane" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BoardMembersEditController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label id="messageLabel" text="Edit Members" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <ListView id="membersListView" fx:id="membersList" onMouseClicked="#membersView_OnClick" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ListView>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                <Button id="removeButton" fx:id="removeMemberButton" disable="true" mnemonicParsing="false" onAction="#removeMemberButton_OnClick" text="Remove">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+              </buttons>
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+            </ButtonBar>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <TextField id="addTextField" fx:id="newMemberNameTextField" maxWidth="1.7976931348623157E308" promptText="New Member Name" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <Button id="addButton" mnemonicParsing="false" onAction="#addNewMemberButton_OnClick" text="Add">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" spacing="30.0">
+               <children>
+                  <Button id="closeButton" mnemonicParsing="false" onAction="#closeButton_OnClick" text="Close">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>

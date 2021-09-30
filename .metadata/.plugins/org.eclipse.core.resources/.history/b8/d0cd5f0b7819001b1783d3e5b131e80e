@@ -1,0 +1,46 @@
+package trelloServer;
+
+import java.rmi.*;
+import trello.*;
+
+/**
+ * TrelloServerInterface Interface
+ * @extends Remote
+ *
+ */
+public interface TrelloServerInterface extends Remote
+{
+
+	/**
+	 * @param username - Name of the user to authenticate
+	 * @param password - Password of the user to authenticate
+	 * @return the authenticated user
+	 * @throws RemoteException
+	 */
+	public User authenticateUser(String name, String password) throws RemoteException, UserNotFoundException;
+	
+	/**
+	 * @param name - Of the new board
+	 * @param owner - Owner of the new board
+	 * @return the new board
+	 * @throws RemoteException
+	 */
+	public Board createBoard(String name, User requester) throws RemoteException;
+	
+	/**
+	 * @param name - Of the board to retrieve
+	 * @param requester - User requesting the board
+	 * @return the requested board
+	 * @throws RemoteException
+	 */
+	public Board getBoard(String name, User requester) throws RemoteException, BoardNotFoundException;
+	
+	/**
+	 * @param oldBoard - The old copy of the board to replace
+	 * @param newBoard - The new copy of the board
+	 * @return whether or not the board successfully updated
+	 * @throws RemoteException
+	 */
+	public boolean updateBoard(Board oldBoard, Board newBoard, User requester) throws RemoteException, BoardNotFoundException;
+	
+}

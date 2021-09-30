@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<TitledPane collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="150.0" onDragDetected="#TitledPane_OnDragDetected" text="List" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox>
+         <children>
+            <Accordion id="accordion">
+               <panes>
+                  <TitledPane animated="false" expanded="false" text="List 1, Card 1">
+                     <content>
+                        <BorderPane>
+                           <bottom>
+                              <VBox spacing="5.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Label" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Component" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Member" />
+                                 </children>
+                              </VBox>
+                           </bottom>
+                           <center>
+                              <VBox spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Labels Go Here" />
+                                    <Label text="Components Go Here" />
+                                    <Label text="Members Go Here" />
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets bottom="10.0" />
+                                 </BorderPane.margin>
+                              </VBox>
+                           </center>
+                        </BorderPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" text="List 1, Card 2">
+                     <content>
+                        <BorderPane>
+                           <bottom>
+                              <VBox spacing="5.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Label" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Component" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Member" />
+                                 </children>
+                              </VBox>
+                           </bottom>
+                           <center>
+                              <VBox spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Labels Go Here" />
+                                    <Label text="Components Go Here" />
+                                    <Label text="Members Go Here" />
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets bottom="10.0" />
+                                 </BorderPane.margin>
+                              </VBox>
+                           </center>
+                        </BorderPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" text="List 1, Card 3">
+                     <content>
+                        <BorderPane>
+                           <bottom>
+                              <VBox spacing="5.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Label" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Component" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Member" />
+                                 </children>
+                              </VBox>
+                           </bottom>
+                           <center>
+                              <VBox spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Labels Go Here" />
+                                    <Label text="Components Go Here" />
+                                    <Label text="Members Go Here" />
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets bottom="10.0" />
+                                 </BorderPane.margin>
+                              </VBox>
+                           </center>
+                        </BorderPane>
+                     </content>
+                  </TitledPane>
+               </panes>
+            </Accordion>
+            <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="New Card">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+   </content>
+   <cursor>
+      <Cursor fx:constant="MOVE" />
+   </cursor>
+</TitledPane>

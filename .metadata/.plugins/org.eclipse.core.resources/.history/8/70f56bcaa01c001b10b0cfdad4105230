@@ -1,0 +1,124 @@
+package trelloServer;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.rmi.ConnectException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import trello.*;
+
+class TrelloServerTest
+{
+	
+	TrelloServer trelloServer;
+	Registry rmiregistry;
+	ArrayList<User> users;
+
+	@BeforeEach
+	void setUp() throws Exception
+	{
+		try
+		{
+			try
+			{
+				rmiregistry = LocateRegistry.getRegistry(1099);
+				rmiregistry.lookup("SERVER");
+			}
+			catch (ConnectException e)
+			{
+				rmiregistry = LocateRegistry.createRegistry(1099);
+			}
+			catch (NotBoundException e)
+			{
+				// Just continue to finally, no need to handle anything here
+			}
+			finally
+			{
+				trelloServer = new TrelloServer();
+				rmiregistry.rebind("TRELLO_SERVER", trelloServer);
+				
+				// Add an arraylist of users for testing
+				for (int i = 0; i < 30; i++)
+					users.add(new User("user" + String.valueOf(i), "password" + String.valueOf(i)));
+				
+				trelloServer.setUsers(users);
+			}
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void testAuthenticateUser()
+	{
+		// Let's try to authenticate all the users in the list
+		for (User u : users)
+		{
+			try
+			{
+			assertEquals(u, trelloServer.authenticateUser(u.getName(), u.getPassword()));
+			}
+			catch (UserNotFoundException | RemoteException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Test
+	void testGetBoard()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCreateBoard()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testUpdateBoard()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testStartServer()
+	{
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCloseServer()
+	{
+		fail("Not yet implemented");
+	}
+	
+	@AfterEach
+	void tearDown()
+	{
+		try
+		{
+			// The registry should be running when this is called
+			Registry rmiregistry = LocateRegistry.getRegistry(1099);
+
+			rmiregistry.unbind("TRELLO_SERVER");
+		}
+		catch (RemoteException | NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}

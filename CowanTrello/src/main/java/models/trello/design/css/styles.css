@@ -1,0 +1,5 @@
+@import "com/sun/javafx/scene/control/skin/modena/modena.css";
+
+.button {
+	-fx-background-color: red;
+}

@@ -1,0 +1,23 @@
+package trelloServer;
+
+
+public class UserNotFoundException extends Exception
+{
+
+	/**
+	 * 
+	 */
+	public UserNotFoundException()
+	{
+		super();
+	}
+
+	/**
+	 * @param message
+	 */
+	public UserNotFoundException(String message)
+	{
+		super(message);
+	}
+
+}
